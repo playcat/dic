@@ -1,0 +1,16 @@
+body {
+  background-image: url('night_sky.jpg');
+  background-size: cover;
+  font-family: Arial, sans-serif;
+}
+ a:visited, a:link, a { color: white; }
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-size: 3em;
+}
