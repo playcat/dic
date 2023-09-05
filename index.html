@@ -51,7 +51,7 @@
       document.getElementById("milestone30").className = days < 30 ? "active-milestone" : "inactive-milestone";
       document.getElementById("milestone20").className = days < 20 ? "active-milestone" : "inactive-milestone";
       document.getElementById("milestone10").className = days < 10 ? "active-milestone" : "inactive-milestone";
-      document.getElementById("milestone4").className = days < 4 ? "special-milestone" : "inactive-milestone";
+      document.getElementById("milestone4").className = days < 4 ? "special-milestone blink" : "inactive-milestone";
     }
 
     setInterval(updateTime, 1000);
