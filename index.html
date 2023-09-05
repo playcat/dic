@@ -7,10 +7,18 @@
 <body>
   <a href="https://dic.digital/github.html" class="top-link">Powered by GitHub! Wasting no money :)</a>
   <div class="container">
-    <div id="timer">
-      Loading...
+    <div id="timer" class="timer">
+      <div class="timer-labels">
+        Days:<br>
+        Hours:<br>
+        Minutes:<br>
+        Seconds:
+      </div>
+      <div class="timer-values" id="timer-values">
+        Loading...
+      </div>
     </div>
-    <div id="milestones">
+    <div id="milestones" class="milestones">
       <span id="milestone30" class="inactive-milestone">Under 30</span> |
       <span id="milestone20" class="inactive-milestone">Under 20</span> |
       <span id="milestone10" class="inactive-milestone">Under 10</span> |
@@ -35,8 +43,7 @@
       diff -= minutes * 60;
       var seconds = diff;
 
-      document.getElementById("timer").innerHTML = "Days: " + days + "<br>Hours: " + hours + "<br>Minutes: " + minutes + "<br>Seconds: " + seconds;
-
+      document.getElementById("timer-values").innerHTML = days + "<br>" + hours + "<br>" + minutes + "<br>" + seconds;
       updateMilestones(days);
     }
 
