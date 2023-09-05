@@ -2,8 +2,8 @@ body {
   background-image: url('night_sky.jpg');
   background-size: cover;
   font-family: Arial, sans-serif;
+  color: white;
 }
- a:visited, a:link, a { color: white; }
 
 .container {
   position: absolute;
@@ -11,6 +11,26 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
-  font-size: 3em;
+  font-size: 2em;
 }
+
+.top-link {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1em;
+}
+
+.active-milestone {
+  color: white;
+}
+
+.inactive-milestone {
+  color: darkgray;
+}
+
+.special-milestone {
+  color: pink;
+}
+
+ a:visited, a:link, a { color: white; }
