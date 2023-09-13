@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,36 +5,119 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <canvas id="fireworks"></canvas> <!-- Fireworks canvas -->
   <a href="https://dic.digital/github.html" class="top-link">Powered by GitHub! Wasting no money :)</a>
   <div class="container">
-    <div id="timer">
-      Loading...
+    <div id="timer" class="timer">
+      <div class="timer-labels">
+        Days:<br>
+        Hours:<br>
+        Minutes:<br>
+        Seconds:
+      </div>
+      <div class="timer-values" id="timer-values">
+        Loading...
+      </div>
+    </div>
+    <div id="milestones" class="milestones">
+      <span id="milestone30" class="inactive-milestone">Under 30</span> |
+      <span id="milestone20" class="inactive-milestone">Under 20</span> |
+      <span id="milestone15" class="inactive-milestone blink">Halfway there</span> |
+      <span id="milestone10" class="inactive-milestone">Under 10</span> |
+      <span id="milestone4" class="inactive-milestone">Sweet suffering</span>
     </div>
   </div>
 
   <script>
-	  function updateTime() {
-		        var now = new Date();
-		        var target = new Date(now.getFullYear(), now.getMonth(), 25, 9, 0, 0);
-		        // If the current date is after the 25th of this month at 9:00, set target to h at 9:00
-		        if (now > target) {
-				        target.setMonth(target.getMonth() + 1);
-				      }
+    function updateTime() {
+      var now = new Date();
+      var target = new Date(now.getFullYear(), now.getMonth(), 25, 9, 0, 0);
+      if (now > target) {
+        target.setMonth(target.getMonth() + 1);
+      }
 
-		        var diff = Math.floor((target - now) / 1000);
-		        var days = Math.floor(diff / (60 * 60 * 24));
-		        diff -= days * (60 * 60 * 24);
-		        var hours = Math.floor(diff / (60 * 60));
-		        diff -= hours * (60 * 60);
-		        var minutes = Math.floor(diff / 60);
-		        diff -= minutes * 60;
-		        var seconds = diff;
+      var diff = Math.floor((target - now) / 1000);
+      var days = Math.floor(diff / (60 * 60 * 24));
+      diff -= days * (60 * 60 * 24);
+      var hours = Math.floor(diff / (60 * 60));
+      diff -= hours * (60 * 60);
+      var minutes = Math.floor(diff / 60);
+      diff -= minutes * 60;
+      var seconds = diff;
 
-		        document.getElementById("timer").innerHTML = days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
-		      }
+      document.getElementById("timer-values").innerHTML = days + "<br>" + hours + "<br>" + minutes + "<br>" + seconds;
+      updateMilestones(days);
+      initiateFireworksIfNeeded();
+    }
+
+    function updateMilestones(days) {
+      document.getElementById("milestone30").className = days < 30 ? "active-milestone" : "inactive-milestone";
+      document.getElementById("milestone20").className = days < 20 ? "active-milestone" : "inactive-milestone";
+      document.getElementById("milestone15").className = days <= 15 ? "active-milestone" : "inactive-milestone ";
+      document.getElementById("milestone10").className = days < 10 ? "active-milestone" : "inactive-milestone";
+      document.getElementById("milestone4").className = days < 4 ? "special-milestone blink" : "inactive-milestone";
+    }
+
+    let canvas = document.getElementById('fireworks');
+    let ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+
+    function explode(x, y) {
+      let count = 10;
+      while (count--) {
+        particles.push({
+          x: x,
+          y: y,
+          xVel: (Math.random() - 0.5) * 10,
+          yVel: (Math.random() - 0.5) * 10,
+          alpha: 1
+        });
+      }
+    }
+
+    function updateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let i = particles.length;
+      while (i--) {
+        let particle = particles[i];
+        particle.yVel += 0.05;
+        particle.x += particle.xVel;
+        particle.y += particle.yVel;
+        particle.alpha -= 0.01;
+
+        if (particle.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.fillStyle = 'rgba(255, 165, 0, ' + particle.alpha + ')';
+        ctx.fillRect(particle.x, particle.y, 2, 2);
+      }
+
+      if (particles.length > 0) {
+        requestAnimationFrame(updateParticles);
+      }
+    }
+
+    function checkFireworkCondition() {
+      if (days <= 1) {
+        explode(Math.random() * canvas.width, Math.random() * canvas.height);
+        updateParticles();
+        setTimeout(checkFireworkCondition, 800);
+      }
+    }
+
+    function initiateFireworksIfNeeded() {
+      if (days <= 1 && particles.length === 0) {
+        checkFireworkCondition();
+      }
+    }
 
     setInterval(updateTime, 1000);
     updateTime();
+
   </script>
 </body>
 </html>
