@@ -1,0 +1,36 @@
+name: Append -dev suffix and Merge to Main
+
+on:
+  push:
+    branches:
+      - DEV
+
+jobs:
+  rename-and-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: DEV
+
+    - name: Append -dev suffix to files
+      run: |
+        for file in $(find . -type f); do
+            mv "$file" "${file%.*}-dev.${file##*.}"
+        done
+
+    - name: Commit changes
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git add .
+        git commit -m "Append -dev suffix to files"
+        git push origin DEV
+
+    - name: Merge to Main
+      run: |
+        git checkout main
+        git merge DEV --no-ff -m "Merge changes from DEV with -dev suffix"
+        git push origin main
