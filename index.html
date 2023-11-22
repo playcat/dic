@@ -3,7 +3,6 @@
 <head>
   <title>DIC: Stay calm, nice and supportive. And remember...</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/@fireworks-js/browser"></script>
 </head>
 <body>
   <a href="https://dic.digital/github.html" class="top-link">Powered by GitHub! Wasting no money :)</a>
@@ -47,11 +46,6 @@
 
       document.getElementById("timer-values").innerHTML = days + "<br>" + hours + "<br>" + minutes + "<br>" + seconds;
       updateMilestones(days);
-
-      if (!fireworkStarted && days < 4) {
-        fireworkStarted = true
-        fireworks.start()
-      }
     }
 
     function updateMilestones(days) {
@@ -62,38 +56,6 @@
       document.getElementById("milestone4").className = days < 4 ? "special-milestone blink" : "inactive-milestone";
     }
 
-    // Fireworks effect initialization
-    const fireworks = new Fireworks({
-      target: document.body,
-      hue: 120,
-      startDelay: 1,
-      minDelay: 20,
-      maxDelay: 30,
-      speed: 2,
-      acceleration: 1.05,
-      friction: 0.98,
-      gravity: 1,
-      particles: 75,
-      trace: 3,
-      explosion: 5,
-      boundaries: {
-        top: 50,
-        bottom: document.body.clientHeight,
-        left: 50,
-        right: document.body.clientWidth
-      },
-      sound: {
-        enabled: false,
-        files: [
-          'https://example.com/sounds/explosion0.mp3',
-          'https://example.com/sounds/explosion1.mp3',
-          'https://example.com/sounds/explosion2.mp3'
-        ],
-        volume: { min: 1, max: 2 }
-      }
-    });
-
-    var fireworkStarted = false;
     setInterval(updateTime, 1000);
     updateTime();
   </script>
