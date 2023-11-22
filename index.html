@@ -49,7 +49,7 @@
       document.getElementById("timer-values").innerHTML = days + "<br>" + hours + "<br>" + minutes + "<br>" + seconds;
       updateMilestones(days);
 
-      if (!fireworksLoaded && days < 4) {
+      if (!fireworksLoaded && days <= 1) {
         fireworksLoaded = true;
               // Simple JavaScript-based fireworks effect
         document.addEventListener('DOMContentLoaded', function() {
