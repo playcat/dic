@@ -32,9 +32,26 @@
     
     function updateTime() {
       var now = new Date();
-      var target = new Date(now.getFullYear(), now.getMonth(), 25, 7, 0, 0);
+      var targetDay = now.getMonth() === 11 ? 15 : 25; // 15th for December, 25th for other months
+      var target = new Date(now.getFullYear(), now.getMonth(), targetDay, 7, 0, 0);
+    
+      // Adjust for weekends
+      if (target.getDay() === 0) { // Sunday
+        target.setDate(target.getDate() - 2); // Set to Friday
+      } else if (target.getDay() === 6) { // Saturday
+        target.setDate(target.getDate() - 1); // Set to Friday
+      }
+    
+      // If the current date is past the target, set target to next month
       if (now > target) {
         target.setMonth(target.getMonth() + 1);
+        target.setDate(targetDay);
+        // Recheck for weekends in the new month
+        if (target.getDay() === 0) {
+          target.setDate(target.getDate() - 2);
+        } else if (target.getDay() === 6) {
+          target.setDate(target.getDate() - 1);
+        }
       }
 
       var diff = Math.floor((target - now) / 1000);
