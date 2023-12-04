@@ -4,7 +4,7 @@
   <title>DIC: Stay calm, nice and supportive. And remember...</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="body">
   <a href="https://dic.digital/github.html" class="top-link">Powered by GitHub! Wasting no money :)</a>
   <div class="container">
     <div id="timer" class="timer">
@@ -134,6 +134,17 @@
       document.getElementById("milestone10").className = days < 10 ? "active-milestone" : "inactive-milestone";
       document.getElementById("milestone4").className = days < 4 ? "special-milestone blink" : "inactive-milestone";
     }
+
+    function updateBackgroundForDecember() {
+        var now = new Date();
+        var currentMonth = now.getMonth(); // Note: January is 0, December is 11
+    
+        if (currentMonth === 11) { // December
+            document.getElementById("body").style.backgroundImage = "url('xmass.png')";
+        }
+    }
+
+    updateBackgroundForDecember();
 
     setInterval(updateTime, 1000);
     updateTime();
