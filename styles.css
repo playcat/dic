@@ -5,6 +5,10 @@ body {
   color: white;
 }
 
+
+a:visited, a:link, a { color: white; }
+h1 { font-size: 32pt; }
+
 .container {
   position: absolute;
   top: 50%;
@@ -55,14 +59,24 @@ body {
     animation: blink-animation 1s steps(5, start) infinite;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
   }
+
   @keyframes blink-animation {
     to {
       visibility: hidden;
     }
   }
+
   @-webkit-keyframes blink-animation {
     to {
       visibility: hidden;
     }
   }
- a:visited, a:link, a { color: white; }
+
+    .task {
+        margin: 5px;
+        padding: 10px;
+        background-color: lightblue;
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+    }
