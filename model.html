@@ -15,8 +15,8 @@
                 var age = parseInt(document.getElementById("age").value);
                 var gender = document.getElementById("gender").value;
 
-                var ltv = calculateLTV(firstName, lastName, ethnicity, age, gender);
                 var sensitivity = calculateSensitivity(firstName, lastName, ethnicity, age, gender);
+                var ltv = calculateLTV(firstName, lastName, ethnicity, age, gender) * 60 * sensitivity; 
 
                 document.getElementById("ltvResult").innerHTML = "Predicted LTV (5 years): CHF " + ltv.toFixed(2);
                 document.getElementById("sensitivityResult").innerHTML = "Price Sensitivity Score: " + sensitivity.toFixed(2);
@@ -37,7 +37,7 @@
 </head>
 <body id="body"> <!-- Assuming same body ID for consistency -->
     <div class="container"> <!-- Assuming container class for consistency -->
-        <h2>Data Science Model Simulator</h2>
+        <h2>Model: Value Generation Machine v1.0.43</h2>
         <form id="userForm">
             First Name: <input type="text" id="firstName"><br>
             Last Name: <input type="text" id="lastName"><br>
