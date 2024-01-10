@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Science Model Simulation</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming the same CSS file is used as in index.html -->
+    <script>
+        function generatePrediction() {
+            document.getElementById("results").style.display = 'none';
+            document.getElementById("loading").innerHTML = "Changing the world...";
+
+            setTimeout(function() {
+                var firstName = document.getElementById("firstName").value;
+                var lastName = document.getElementById("lastName").value;
+                var ethnicity = document.getElementById("ethnicity").value;
+                var age = parseInt(document.getElementById("age").value);
+                var gender = document.getElementById("gender").value;
+
+                var ltv = calculateLTV(firstName, lastName, ethnicity, age, gender);
+                var sensitivity = calculateSensitivity(firstName, lastName, ethnicity, age, gender);
+
+                document.getElementById("ltvResult").innerHTML = "Predicted LTV (5 years): CHF " + ltv.toFixed(2);
+                document.getElementById("sensitivityResult").innerHTML = "Price Sensitivity Score: " + sensitivity.toFixed(2);
+                
+                document.getElementById("loading").innerHTML = "";
+                document.getElementById("results").style.display = 'block';
+            }, Math.random() * (10000 - 5000) + 5000); // Random delay between 5 and 10 seconds
+        }
+
+        function calculateLTV(firstName, lastName, ethnicity, age, gender) {
+            return Math.random() * 130 - 10; // Range from -10.00 to 120.00 CHF
+        }
+
+        function calculateSensitivity(firstName, lastName, ethnicity, age, gender) {
+            return Math.random(); // Range from 0.0 to 1.0
+        }
+    </script>
+</head>
+<body id="body"> <!-- Assuming same body ID for consistency -->
+    <div class="container"> <!-- Assuming container class for consistency -->
+        <h2>Data Science Model Simulator</h2>
+        <form id="userForm">
+            First Name: <input type="text" id="firstName"><br>
+            Last Name: <input type="text" id="lastName"><br>
+            Ethnicity: <input type="text" id="ethnicity"><br>
+            Age: <input type="number" id="age"><br>
+            Gender: <input type="text" id="gender"><br>
+            <input type="button" value="Predict" onclick="generatePrediction()">
+        </form>
+        <div id="loading"></div>
+        <div id="results" style="display: none;">
+            <p id="ltvResult"></p>
+            <p id="sensitivityResult"></p>
+        </div>
+    </div>
+</body>
+</html>
