@@ -2,7 +2,8 @@ body {
   background-image: url('dic_bg.webp');
   background-size: cover;
   font-family: Arial, sans-serif;
-  color: white;
+  color: black;
+  font-weight: bold; 
 }
 
 
