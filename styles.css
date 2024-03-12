@@ -7,7 +7,7 @@ body {
 }
 
 
-a:visited, a:link, a { color: white; }
+a:visited, a:link, a { color: black; }
 h1 { font-size: 32pt; }
 
 .container {
@@ -39,7 +39,7 @@ h1 { font-size: 32pt; }
 }
 
 .active-milestone {
-  color: white;
+  color: black;
 }
 
 .inactive-milestone {
