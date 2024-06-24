@@ -7,7 +7,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
     gtag('config', 'G-LZHQD45L68');
   </script>
   <title>DIC: Stay calm, nice and supportive. And remember...</title>
@@ -43,19 +42,19 @@
 
   <script>
     var fireworksLoaded = false;
-    
+
     function updateTime() {
       var now = new Date();
       var targetDay = now.getMonth() === 11 ? 15 : 25; // 15th for December, 25th for other months
       var target = new Date(now.getFullYear(), now.getMonth(), targetDay, 7, 0, 0);
-    
+
       // Adjust for weekends
       if (target.getDay() === 0) { // Sunday
         target.setDate(target.getDate() - 2); // Set to Friday
       } else if (target.getDay() === 6) { // Saturday
         target.setDate(target.getDate() - 1); // Set to Friday
       }
-    
+
       // If the current date is past the target, set target to next month
       if (now > target) {
         target.setMonth(target.getMonth() + 1);
@@ -79,10 +78,11 @@
 
       document.getElementById("timer-values").innerHTML = days + "<br>" + hours + "<br>" + minutes + "<br>" + seconds;
       updateMilestones(days);
+      updateBackgroundImage(days);
 
       if (!fireworksLoaded && days <= 1) {
         fireworksLoaded = true;
-              // Simple JavaScript-based fireworks effect
+        // Simple JavaScript-based fireworks effect
         document.addEventListener('DOMContentLoaded', function() {
           var canvasEl = document.createElement('canvas');
           document.body.appendChild(canvasEl);
@@ -94,11 +94,11 @@
           canvasEl.style.height = '100%';
           canvasEl.style.pointerEvents = 'none';
           canvasEl.style.zIndex = '-1';
-      
+
           var ctx = canvasEl.getContext('2d');
           var particles = [];
           var colors = ['#ff0000', '#ff7700', '#fff200', '#00ff00', '#0000ff', '#8a2be2'];
-      
+
           function createFirework() {
             var x = Math.random() * window.innerWidth;
             var y = Math.random() * window.innerHeight;
@@ -111,7 +111,7 @@
               particles.push({ x: x, y: y, vx: vx, vy: vy, color: color });
             }
           }
-      
+
           function updateParticles() {
             ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
             for (var i = particles.length - 1; i >= 0; i--) {
@@ -128,10 +128,10 @@
               if (p.y > window.innerHeight) particles.splice(i, 1);
             }
           }
-      
+
           setInterval(createFirework, 1000);
           setInterval(updateParticles, 20);
-      
+
           window.addEventListener('resize', function() {
             canvasEl.width = window.innerWidth;
             canvasEl.height = window.innerHeight;
@@ -149,10 +149,25 @@
       document.getElementById("milestone4").className = days < 4 ? "special-milestone blink" : "inactive-milestone";
     }
 
+    function updateBackgroundImage(days) {
+      var bodyStyle = document.getElementById("body").style;
+      if (days === 5) {
+        bodyStyle.backgroundImage = "url('finger_05.webp')";
+      } else if (days === 4) {
+        bodyStyle.backgroundImage = "url('finger_04.webp')";
+      } else if (days === 3) {
+        bodyStyle.backgroundImage = "url('finger_03.webp')";
+      } else if (days === 2) {
+        bodyStyle.backgroundImage = "url('finger_02.webp')";
+      } else if (days === 1) {
+        bodyStyle.backgroundImage = "url('finger_01.webp')";
+      }
+    }
+
     function updateBackgroundForDecember() {
         var now = new Date();
         var currentMonth = now.getMonth(); // Note: January is 0, December is 11
-    
+
         if (currentMonth === 11) { // December
             var bodyStyle = document.getElementById("body").style;
             bodyStyle.backgroundImage = "url('xmass.png')";
